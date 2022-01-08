@@ -1,0 +1,9 @@
+{
+  "name": "transport-elasticsearch",
+  "devDependencies": {
+    "@types/node-fetch": "2"
+  },
+  "dependencies": {
+    "node-fetch": "2"
+  }
+}
