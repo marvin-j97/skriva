@@ -63,6 +63,21 @@ tap.test("should only use chosen levels", async () => {
   tap.equal(calledCount, 1);
 });
 
+tap.test("Should continue with error", async () => {
+  const logger = createLogger<string, typeof logLevels, {}>({
+    base: () => ({ timestamp: new Date() }),
+    levels: logLevels,
+    logLevel: "error",
+    transports: [
+      async () => {
+        throw new Error("Help");
+      },
+    ],
+  });
+
+  logger.info("test");
+});
+
 tap.test("should call onError", async () => {
   let error: string = "";
 
