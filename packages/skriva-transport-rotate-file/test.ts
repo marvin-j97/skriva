@@ -12,7 +12,7 @@ const logLevels = {
 type LogBaseContext = { timestamp: Date };
 
 const logger = createLogger<string, typeof logLevels, LogBaseContext>({
-  base: () => ({ timestamp: new Date() }),
+  context: () => ({ timestamp: new Date() }),
   levels: logLevels,
   logLevel: "debug",
   transports: [

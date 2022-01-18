@@ -22,15 +22,23 @@ yarn add skriva
 ```typescript
 // Lower value = more important
 const logLevels = {
-  debug: 0,
-  info: 10,
-  warn: 20,
-  error: 30,
+  error: 0,
+  warn: 10,
+  info: 20,
+  debug: 30,
 };
 
 const logger = createLogger({
   levels: logLevels,
-  logLevel: "debug",
+  // Setting to 'info' will print error, warn, info in this case
+  logLevel: "info",
+  /* ... */
+});
+
+const logger1 = createLogger({
+  levels: logLevels,
+  // Setting to an array works like a whitelist, so in this case ONLY info will be printed
+  logLevel: ["info"],
   /* ... */
 });
 ```
@@ -54,7 +62,7 @@ const logLevels = {
 // Type 2 is the log level type
 // Type 3 is the type of the base context
 const logger = createLogger<string, typeof logLevels, {}>({
-  base: () => ({}),
+  context: () => ({}),
   levels: logLevels,
   logLevel: "debug",
   transports: [
@@ -79,7 +87,7 @@ logger.info("This is a log");
 const logger = createLogger({
   // Adds timestamp to every log
   // The base context function is executed for every received log message
-  base: () => ({ timestamp: new Date() }),
+  context: () => ({ timestamp: new Date() }),
   /* ... */
 });
 ```
@@ -99,7 +107,7 @@ const logLevels = {
 };
 
 const logger = createLogger<string, typeof logLevels, { timestamp: Date }>({
-  base: () => ({ timestamp: new Date() }),
+  context: () => ({ timestamp: new Date() }),
   levels: logLevels,
   logLevel: "debug",
   transports: [
@@ -132,7 +140,7 @@ const logger = createLogger<
   typeof logLevels,
   { timestamp: Date }
 >({
-  base: () => ({ timestamp: new Date() }),
+  context: () => ({ timestamp: new Date() }),
   levels: logLevels,
   logLevel: "debug",
   transports: [
@@ -186,7 +194,7 @@ const colorize: Record<keyof typeof logLevels, Chalk> = {
 };
 
 const logger = createLogger<string, typeof logLevels, { timestamp: Date }>({
-  base: () => ({ timestamp: new Date() }),
+  context: () => ({ timestamp: new Date() }),
   levels: logLevels,
   logLevel: "debug",
   transports: [
