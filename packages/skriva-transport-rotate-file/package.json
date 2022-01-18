@@ -17,8 +17,8 @@
   "bugs": {
     "url": "https://github.com/marvin-j97/skriva/issues"
   },
-  "devDependencies": {},
   "dependencies": {
+    "file-stream-rotator": "^0.5.7",
     "skriva": "^0.0.1"
   },
   "keywords": [

@@ -12,21 +12,18 @@ export function createElasticsearchTransport<T, L extends LogLevels, B extends B
   opts: Options<T, L, B>,
 ): TransportFunction<T, L, B> {
   return async (packet) => {
-    try {
-      const id = opts?.getId?.(packet) || "";
-      const url = id ? `${opts.url}/${opts.index}/_doc/${id}` : `${opts.url}/${opts.index}/_doc/`;
-      const res = await fetch(url, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: id ? "PUT" : "POST",
-        body: JSON.stringify(opts.format(packet)),
-      });
-      if (!res.ok) {
-        console.error(new Error(await res.text()));
-      }
-    } catch (error) {
-      console.error(error);
+    const id = opts?.getId?.(packet) || "";
+    const url = id ? `${opts.url}/${opts.index}/_doc/${id}` : `${opts.url}/${opts.index}/_doc/`;
+
+    const res = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: id ? "PUT" : "POST",
+      body: JSON.stringify(opts.format(packet)),
+    });
+    if (!res.ok) {
+      throw new Error(`Request failed with status ${res.status}: ${await res.text()}`);
     }
   };
 }

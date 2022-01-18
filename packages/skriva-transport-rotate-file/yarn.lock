@@ -2,3 +2,18 @@
 # yarn lockfile v1
 
 
+"file-stream-rotator@^0.5.7":
+  "integrity" "sha512-VYb3HZ/GiAGUCrfeakO8Mp54YGswNUHvL7P09WQcXAJNSj3iQ5QraYSp3cIn1MUyw6uzfgN/EFOarCNa4JvUHQ=="
+  "resolved" "https://registry.npmjs.org/file-stream-rotator/-/file-stream-rotator-0.5.7.tgz"
+  "version" "0.5.7"
+  dependencies:
+    "moment" "^2.11.2"
+
+"moment@^2.11.2":
+  "integrity" "sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+  "version" "2.29.1"
+
+"rotating-file-stream@^3.0.2":
+  "resolved" "https://registry.npmjs.org/rotating-file-stream/-/rotating-file-stream-3.0.2.tgz"
+  "version" "3.0.2"
