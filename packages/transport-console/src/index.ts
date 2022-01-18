@@ -1,7 +1,7 @@
-import type { BasePacket, LogLevels, LogPacket, TransportFunction } from "../../logger/src";
+import type { BasePacket, Formatter, LogLevels, TransportFunction } from "../../logger/src";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
-  format: (packet: LogPacket<T, L, B>) => string;
+  format: Formatter<T, L, B, string>;
 };
 
 export function createConsoleTransport<T, L extends LogLevels, B extends BasePacket>(

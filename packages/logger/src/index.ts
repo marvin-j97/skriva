@@ -8,11 +8,14 @@ export type LogPacket<T, L extends LogLevels, B extends BasePacket> = {
 export type TransportFunction<T, L extends LogLevels, B extends BasePacket> = (
   packet: LogPacket<T, L, B>,
 ) => Promise<void>;
+export type Formatter<T, L extends LogLevels, B extends BasePacket, R> = (
+  packet: LogPacket<T, L, B>,
+) => R;
 
 export type LoggerCreateOptions<T, L extends LogLevels, B extends BasePacket> = {
   logLevel: keyof L;
   levels: L;
-  base: () => B;
+  base: (message: T) => B;
   transports: Array<TransportFunction<T, L, B>>;
 };
 
@@ -27,7 +30,7 @@ export function createLogger<T, L extends LogLevels, B extends BasePacket>(
   for (const [levelName, levelValue] of Object.entries<number>(levels)) {
     loggerFns[levelName as keyof L] = async (message) => {
       if (levelValue >= levelSetting) {
-        const packet: LogPacket<T, L, B> = { ...base(), message, level: levelName };
+        const packet: LogPacket<T, L, B> = { ...base(message), message, level: levelName };
         await Promise.all(transports.map((fn) => fn(packet)));
       }
     };

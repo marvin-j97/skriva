@@ -1,11 +1,11 @@
-import type { BasePacket, LogLevels, LogPacket, TransportFunction } from "../../logger/src";
+import type { BasePacket, Formatter, LogLevels, TransportFunction } from "../../logger/src";
 import fetch from "node-fetch";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
   url: string;
   index: string;
-  format: (packet: LogPacket<T, L, B>) => BasePacket;
-  // id?: (packet: LogPacket<T, L, B>) => string;
+  format: Formatter<T, L, B, BasePacket>;
+  getId?: Formatter<T, L, B, string>;
 };
 
 export function createElasticsearchTransport<T, L extends LogLevels, B extends BasePacket>(
@@ -13,11 +13,13 @@ export function createElasticsearchTransport<T, L extends LogLevels, B extends B
 ): TransportFunction<T, L, B> {
   return async (packet) => {
     try {
-      const res = await fetch(`${opts.url}/${opts.index}/_doc/`, {
+      const id = opts?.getId?.(packet) || "";
+      const url = id ? `${opts.url}/${opts.index}/_doc/${id}` : `${opts.url}/${opts.index}/_doc/`;
+      const res = await fetch(url, {
         headers: {
           "Content-Type": "application/json",
         },
-        method: "POST",
+        method: id ? "PUT" : "POST",
         body: JSON.stringify(opts.format(packet)),
       });
       if (!res.ok) {
