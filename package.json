@@ -6,6 +6,7 @@
   "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "bootstrap": "lerna bootstrap --npm-client yarn",
     "lint": "eslint packages --ext .ts",
     "lint:fix": "eslint packages --fix --ext .ts",
     "test": "tap packages/**/*.test.ts --node-arg=--require=ts-node/register"
