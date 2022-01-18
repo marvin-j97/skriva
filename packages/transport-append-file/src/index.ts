@@ -1,7 +1,6 @@
 import { createWriteStream, mkdirSync } from "fs";
-import { dirname, resolve } from "path";
-
 import type { BasePacket, Formatter, LogLevels, TransportFunction } from "logger";
+import { dirname, resolve } from "path";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
   path: string;

@@ -1,6 +1,5 @@
-import fetch from "node-fetch";
-
 import type { BasePacket, Formatter, LogLevels, TransportFunction } from "logger";
+import fetch from "node-fetch";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
   url: string;
