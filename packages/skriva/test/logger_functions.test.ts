@@ -3,8 +3,8 @@ import tap from "tap";
 import { createLogger } from "../src";
 
 const logLevels = {
-  info: 50,
-  error: 100,
+  error: 50,
+  info: 100,
 };
 
 tap.test("should create log functions for levels", async () => {
@@ -14,7 +14,7 @@ tap.test("should create log functions for levels", async () => {
   const logger = createLogger<string, typeof logLevels, {}>({
     base: () => ({ timestamp: new Date() }),
     levels: logLevels,
-    logLevel: "info",
+    logLevel: "error",
     transports: [
       async (packet) => {
         calledSet.add(packet.level);
@@ -42,7 +42,7 @@ tap.test("should only use chosen levels", async () => {
   const logger = createLogger<string, typeof logLevels, {}>({
     base: () => ({ timestamp: new Date() }),
     levels: logLevels,
-    logLevel: "error",
+    logLevel: "info",
     transports: [
       async (packet) => {
         calledSet.add(packet.level);
@@ -58,7 +58,30 @@ tap.test("should only use chosen levels", async () => {
   logger.error("test");
   logger.info("test");
 
-  tap.ok(calledSet.has("error"));
-  tap.ok(!calledSet.has("info"));
+  tap.ok(!calledSet.has("error"));
+  tap.ok(calledSet.has("info"));
   tap.equal(calledCount, 1);
+});
+
+tap.test("should call onError", async () => {
+  let error: string = "";
+
+  const logger = createLogger<string, typeof logLevels, {}>({
+    base: () => ({ timestamp: new Date() }),
+    levels: logLevels,
+    logLevel: "error",
+    transports: [
+      async () => {
+        throw new Error("Help");
+      },
+    ],
+    onError: (e) => (error = e.message),
+  });
+
+  logger.info("test");
+
+  // Need to sleep, because onError is a callback
+  await new Promise((r) => setTimeout(r, 500));
+
+  tap.equal(error, "Help");
 });
