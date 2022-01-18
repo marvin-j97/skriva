@@ -1,7 +1,7 @@
 {
-  "name": "skriva",
+  "name": "skriva-transport-rotate-file",
   "version": "0.0.1",
-  "description": "Minimal Typescript logger",
+  "description": "Write logs to a rotating file",
   "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
   "homepage": "https://github.com/marvin-j97/skriva#readme",
   "license": "MIT",
@@ -17,11 +17,15 @@
   "bugs": {
     "url": "https://github.com/marvin-j97/skriva/issues"
   },
+  "devDependencies": {},
+  "dependencies": {
+    "skriva": "^0.0.1"
+  },
   "keywords": [
     "skriva",
-    "logger",
-    "minimal",
-    "logging",
-    "logging-library"
+    "transport",
+    "daily-rotate-file",
+    "log-rotate",
+    "logrotate"
   ]
 }
