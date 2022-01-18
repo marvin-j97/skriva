@@ -1,6 +1,6 @@
 import { createWriteStream, mkdirSync } from "fs";
-import type { BasePacket, Formatter, LogLevels, TransportFunction } from "skriva";
 import { dirname, resolve } from "path";
+import type { BasePacket, Formatter, LogLevels, TransportFunction } from "skriva";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
   path: string;

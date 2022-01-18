@@ -1,5 +1,5 @@
-import type { BasePacket, Formatter, LogLevels, TransportFunction } from "skriva";
 import fetch from "node-fetch";
+import type { BasePacket, Formatter, LogLevels, TransportFunction } from "skriva";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
   url: string;
