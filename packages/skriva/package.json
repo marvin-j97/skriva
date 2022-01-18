@@ -1,7 +1,7 @@
 {
   "name": "skriva",
   "version": "0.0.1",
-  "description": "Minimal Typescript logger",
+  "description": "Minimal Typescript logging system",
   "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
   "homepage": "https://github.com/marvin-j97/skriva#readme",
   "license": "MIT",

@@ -1,5 +1,5 @@
 # skriva-transport-append-file
 
-Write logs to rotating files
+Stupidly append logs to a file
 
 Check https://github.com/marvin-j97/skriva for more info
