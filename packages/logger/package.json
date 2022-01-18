@@ -1,7 +1,10 @@
 {
   "name": "logger",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
-  "devDependencies": {}
+  "scripts": {
+    "build": "tsc"
+  }
 }

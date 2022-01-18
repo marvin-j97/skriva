@@ -1,16 +1,4 @@
-export type BasePacket = Record<string, unknown>;
-export type LogLevels = Record<string, number>;
-export type LogFunction<T> = (x: T) => Promise<void>;
-export type LogPacket<T, L extends LogLevels, B extends BasePacket> = {
-  message: T;
-  level: keyof L;
-} & B;
-export type TransportFunction<T, L extends LogLevels, B extends BasePacket> = (
-  packet: LogPacket<T, L, B>,
-) => Promise<void>;
-export type Formatter<T, L extends LogLevels, B extends BasePacket, R> = (
-  packet: LogPacket<T, L, B>,
-) => R;
+import { BasePacket, LogFunction, LogLevels, LogPacket, TransportFunction } from "./types";
 
 export type LoggerCreateOptions<T, L extends LogLevels, B extends BasePacket> = {
   logLevel: keyof L;
@@ -38,3 +26,5 @@ export function createLogger<T, L extends LogLevels, B extends BasePacket>(
 
   return { ...loggerFns };
 }
+
+export * from "./types";

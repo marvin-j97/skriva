@@ -1,4 +1,4 @@
-import type { BasePacket, Formatter, LogLevels, TransportFunction } from "../../logger/src";
+import type { BasePacket, Formatter, LogLevels, TransportFunction } from "logger";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {
   format: Formatter<T, L, B, string>;
