@@ -10,7 +10,8 @@
     "build": "lerna run build",
     "lint": "eslint packages --ext .ts",
     "lint:fix": "eslint packages --fix --ext .ts",
-    "test": "tap packages/**/*.test.ts --node-arg=--require=ts-node/register"
+    "test": "tap packages/**/*.test.ts --node-arg=--require=ts-node/register",
+    "publish": "lerna publish"
   },
   "devDependencies": {
     "@types/node": "16.3.2",
