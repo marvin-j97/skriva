@@ -24,5 +24,8 @@
     "skriva",
     "transport",
     "console"
+  ],
+  "files": [
+    "dist"
   ]
 }

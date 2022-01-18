@@ -27,5 +27,8 @@
     "daily-rotate-file",
     "log-rotate",
     "logrotate"
+  ],
+  "files": [
+    "dist"
   ]
 }

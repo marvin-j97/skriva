@@ -28,5 +28,8 @@
     "skriva",
     "transport",
     "elasticsearch"
+  ],
+  "files": [
+    "dist"
   ]
 }

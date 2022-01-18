@@ -7,11 +7,11 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna bootstrap --npm-client yarn",
-    "build": "lerna run build",
+    "build": "lerna run build --npm-client yarn",
     "lint": "eslint packages --ext .ts",
     "lint:fix": "eslint packages --fix --ext .ts",
     "test": "tap packages/**/*.test.ts --node-arg=--require=ts-node/register",
-    "publish": "lerna publish"
+    "publish:all": "lerna publish from-package"
   },
   "devDependencies": {
     "@types/node": "16.3.2",
