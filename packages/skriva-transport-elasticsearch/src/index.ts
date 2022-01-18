@@ -1,4 +1,4 @@
-import type { BasePacket, Formatter, LogLevels, TransportFunction } from "logger";
+import type { BasePacket, Formatter, LogLevels, TransportFunction } from "skriva";
 import fetch from "node-fetch";
 
 type Options<T, L extends LogLevels, B extends BasePacket> = {

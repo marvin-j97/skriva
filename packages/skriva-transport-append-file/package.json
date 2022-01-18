@@ -1,0 +1,15 @@
+{
+  "name": "skriva-transport-append-file",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "repository": "https://github.com/marvin-j97/skriva.git",
+  "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "skriva": "^0.0.1"
+  }
+}

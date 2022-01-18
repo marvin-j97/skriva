@@ -27,8 +27,8 @@ tap.test("should create log functions for levels", async () => {
   tap.equal(typeof logger.info, "function");
   tap.equal(Object.keys(logger).length, 2);
 
-  await logger.error("test");
-  await logger.info("test");
+  logger.error("test");
+  logger.info("test");
 
   tap.ok(calledSet.has("error"));
   tap.ok(calledSet.has("info"));
@@ -55,8 +55,8 @@ tap.test("should only use chosen levels", async () => {
   tap.equal(typeof logger.info, "function");
   tap.equal(Object.keys(logger).length, 2);
 
-  await logger.error("test");
-  await logger.info("test");
+  logger.error("test");
+  logger.info("test");
 
   tap.ok(calledSet.has("error"));
   tap.ok(!calledSet.has("info"));

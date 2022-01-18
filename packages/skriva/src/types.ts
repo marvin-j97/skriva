@@ -1,6 +1,6 @@
 export type BasePacket = Record<string, unknown>;
 export type LogLevels = Record<string, number>;
-export type LogFunction<T> = (x: T) => Promise<void>;
+export type LogFunction<T> = (x: T) => void;
 
 export type LogPacket<T, L extends LogLevels, B extends BasePacket> = {
   message: T;
