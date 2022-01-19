@@ -11,7 +11,7 @@ tap.test("should create log functions for levels", async () => {
   const calledSet = new Set<string>();
   let calledCount = 0;
 
-  const logger = createLogger<string, typeof logLevels, {}>({
+  const logger = createLogger({
     context: () => ({}),
     logLevels,
     level: "error",
@@ -41,7 +41,7 @@ tap.test("should only use chosen levels", async () => {
   const calledSet = new Set<string>();
   let calledCount = 0;
 
-  const logger = createLogger<string, typeof logLevels, {}>({
+  const logger = createLogger({
     context: () => ({}),
     logLevels: logLevels,
     level: "info",
@@ -71,7 +71,7 @@ tap.test("should only use chosen levels (array)", async () => {
   const calledSet = new Set<string>();
   let calledCount = 0;
 
-  const logger = createLogger<string, typeof logLevels, {}>({
+  const logger = createLogger({
     context: () => ({}),
     logLevels: logLevels,
     level: ["info"],
@@ -98,7 +98,7 @@ tap.test("should only use chosen levels (array)", async () => {
 });
 
 tap.test("Should continue even with error", async () => {
-  const logger = createLogger<string, typeof logLevels, {}>({
+  const logger = createLogger({
     context: () => ({}),
     logLevels: logLevels,
     level: "error",
@@ -117,7 +117,7 @@ tap.test("Should continue even with error", async () => {
 tap.test("should call onError", async () => {
   let error: string = "";
 
-  const logger = createLogger<string, typeof logLevels, {}>({
+  const logger = createLogger({
     context: () => ({}),
     logLevels: logLevels,
     level: "error",

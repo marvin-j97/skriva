@@ -8,6 +8,8 @@ From Old Norse _skrifa_, from Proto-Germanic _\*skrībaną_, a late borrowing fr
 
 Super-unopionionated no-black-magic logger, with zero dependencies, tailored for Typescript usage.
 
+Like other logging libraries, multiple transports with custom logging levels are supported.
+
 ## Install
 
 ```bash
@@ -51,10 +53,10 @@ import { createLogger } from "skriva";
 import { createConsoleTransport } from "skriva-transport-console";
 
 const logLevels = {
-  debug: 0,
-  info: 10,
-  warn: 20,
-  error: 30,
+  error: 0,
+  warn: 10,
+  info: 20,
+  debug: 30,
 };
 
 // createLogger has 3 types that describe what types of logs are being used
@@ -100,10 +102,10 @@ import { createLogger } from "skriva";
 import { createConsoleTransport } from "skriva-transport-console";
 
 const logLevels = {
-  debug: 0,
-  info: 10,
-  warn: 20,
-  error: 30,
+  error: 0,
+  warn: 10,
+  info: 20,
+  debug: 30,
 };
 
 const logger = createLogger<string, typeof logLevels, { timestamp: Date }>({
@@ -129,10 +131,10 @@ import { createLogger } from "skriva";
 import { createConsoleTransport } from "skriva-transport-console";
 
 const logLevels = {
-  debug: 0,
-  info: 10,
-  warn: 20,
-  error: 30,
+  error: 0,
+  warn: 10,
+  info: 20,
+  debug: 30,
 };
 
 const logger = createLogger<
@@ -180,17 +182,17 @@ import { createConsoleTransport } from "skriva-transport-console";
 import chalk from "chalk";
 
 const logLevels = {
-  debug: 0,
-  info: 10,
-  warn: 20,
-  error: 30,
+  error: 0,
+  warn: 10,
+  info: 20,
+  debug: 30,
 };
 
 const colorize: Record<keyof typeof logLevels, Chalk> = {
-  debug: chalk.magentaBright,
-  info: chalk.green,
-  warn: chalk.yellow,
   error: chalk.red,
+  warn: chalk.yellow,
+  info: chalk.green,
+  debug: chalk.magentaBright,
 };
 
 const logger = createLogger<string, typeof logLevels, { timestamp: Date }>({

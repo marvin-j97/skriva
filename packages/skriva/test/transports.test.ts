@@ -11,7 +11,7 @@ const logLevels = {
 tap.test("should only call transports with appropiate level", async () => {
   const calledSet = new Set<string>();
 
-  const logger = createLogger<string, typeof logLevels, {}>({
+  const logger = createLogger({
     context: () => ({ timestamp: new Date() }),
     logLevels: logLevels,
     level: "error",
