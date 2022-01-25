@@ -32,7 +32,7 @@ const logLevels = {
 
 const logger = createLogger({
   levels: logLevels,
-  // Setting to 'info' will print error, warn, info in this case
+  // Setting to 'info' will print everything up to info (error, warn, info in this case)
   logLevel: "info",
   /* ... */
 });
@@ -88,6 +88,7 @@ logger.info("This is a log");
 ```typescript
 const logger = createLogger({
   // Adds timestamp to every log
+  // This alone won't make it show up in the message, you need to consume the context (see "More complex logger" or "Console logger with colours")
   // The base context function is executed for every received log message
   context: () => ({ timestamp: new Date() }),
   /* ... */
