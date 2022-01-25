@@ -33,7 +33,7 @@ export function createFileRotator<T, L extends LogLevels, B extends BasePacket>(
     stream.on("rotate", (oldFile: string) => {
       // TODO: if oldFile does not exist, return early
       // TODO: if archived file already exists, return early
-      
+
       const gzip = zlib.createGzip();
       const inp = createReadStream(oldFile);
       const out = createWriteStream(`${oldFile}.gz`);
