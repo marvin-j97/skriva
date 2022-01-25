@@ -215,7 +215,7 @@ logger.warn("Warning");
 
 ## Transports
 
-- [Console transport](./packages/skriva-transport-console/README.md) (recommended)
-- [Rotating file transport](./packages/skriva-transport-rotate-file/README.md) (recommended)
-- [Elasticsearch transport](./packages/skriva-transport-elasticsearch/README.md)
-- [Append file transport](./packages/skriva-transport-append-file/README.md) (prefer using rotating file instead)
+- [Console transport](./packages/skriva-transport-console) (recommended)
+- [Rotating file transport](./packages/skriva-transport-rotate-file) (recommended)
+- [Elasticsearch transport](./packages/skriva-transport-elasticsearch)
+- [Append file transport](./packages/skriva-transport-append-file) (prefer using rotating file instead)
