@@ -11,7 +11,7 @@
     "lint": "eslint packages --ext .ts",
     "lint:fix": "eslint packages --fix --ext .ts",
     "test": "tap packages/**/*.test.ts --no-check-coverage --node-arg=--require=ts-node/register",
-    "publish:all": "lerna publish from-package"
+    "publish:all": "lerna publish"
   },
   "devDependencies": {
     "@types/node": "16.3.2",
