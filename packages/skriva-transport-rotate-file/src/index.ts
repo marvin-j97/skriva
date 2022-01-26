@@ -95,6 +95,7 @@ export function createFileRotator<T, L extends LogLevels, B extends BasePacket>(
       const gzip = zlib.createGzip();
       const inp = createReadStream(oldFile);
       const out = createWriteStream(zipFile);
+
       inp
         .pipe(gzip)
         .pipe(out)
