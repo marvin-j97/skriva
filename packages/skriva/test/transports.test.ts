@@ -1,6 +1,7 @@
 import tap from "tap";
 
 import { createLogger } from "../src";
+import { sleep } from "./common";
 
 const logLevels = {
   error: 0,
@@ -17,19 +18,19 @@ tap.test("should only call transports with appropiate level", async () => {
     level: "error",
     transports: [
       {
-        fn: async () => {
+        handler: async () => {
           calledSet.add("error");
         },
         level: "error",
       },
       {
-        fn: async () => {
+        handler: async () => {
           calledSet.add("warn");
         },
         level: "warn",
       },
       {
-        fn: async () => {
+        handler: async () => {
           calledSet.add("info");
         },
         level: "info",
@@ -39,6 +40,8 @@ tap.test("should only call transports with appropiate level", async () => {
 
   logger.info("message");
 
+  await sleep(50);
+
   tap.ok(!calledSet.has("error"));
   tap.ok(!calledSet.has("warn"));
   tap.ok(calledSet.has("info"));
@@ -46,6 +49,8 @@ tap.test("should only call transports with appropiate level", async () => {
   calledSet.clear();
 
   logger.warn("message");
+
+  await sleep(50);
 
   tap.ok(!calledSet.has("error"));
   tap.ok(calledSet.has("warn"));

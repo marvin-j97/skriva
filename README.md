@@ -31,16 +31,16 @@ const logLevels = {
 };
 
 const logger = createLogger({
-  levels: logLevels,
+  logLevels,
   // Setting to 'info' will print error, warn, info in this case
-  logLevel: "info",
+  level: "info",
   /* ... */
 });
 
 const logger1 = createLogger({
-  levels: logLevels,
+  logLevels,
   // Setting to an array works like a whitelist, so in this case ONLY info will be printed
-  logLevel: ["info"],
+  level: ["info"],
   /* ... */
 });
 ```
@@ -65,16 +65,18 @@ const logLevels = {
 // Type 3 is the type of the base context
 const logger = createLogger<string, typeof logLevels, {}>({
   context: () => ({}),
-  levels: logLevels,
-  logLevel: "debug",
+  logLevels,
+  level: "debug",
   transports: [
     // Transports receive an object (packet) containing:
     // - the message
     // - the log level
     // - the base context (merged into the object)
-    createConsoleTransport({
-      format: ({ message }) => message,
-    }),
+    {
+      handler: createConsoleTransport({
+        format: ({ message }) => message,
+      }),
+    },
   ],
 });
 
@@ -110,12 +112,14 @@ const logLevels = {
 
 const logger = createLogger<string, typeof logLevels, { timestamp: Date }>({
   context: () => ({ timestamp: new Date() }),
-  levels: logLevels,
-  logLevel: "debug",
+  logLevels,
+  level: "debug",
   transports: [
-    createConsoleTransport({
-      format: (packet) => JSON.stringify(packet),
-    }),
+    {
+      handler: createConsoleTransport({
+        format: (packet) => JSON.stringify(packet),
+      }),
+    },
   ],
 });
 
@@ -143,12 +147,14 @@ const logger = createLogger<
   { timestamp: Date }
 >({
   context: () => ({ timestamp: new Date() }),
-  levels: logLevels,
-  logLevel: "debug",
+  logLevels,
+  level: "debug",
   transports: [
-    createConsoleTransport({
-      format: ({ message, ...rest }) => JSON.stringify({ ...message, ...rest }),
-    }),
+    {
+      handler: createConsoleTransport({
+        format: ({ message, ...rest }) => JSON.stringify({ ...message, ...rest }),
+      }),
+    },
   ],
 });
 
@@ -197,13 +203,15 @@ const colorize: Record<keyof typeof logLevels, Chalk> = {
 
 const logger = createLogger<string, typeof logLevels, { timestamp: Date }>({
   context: () => ({ timestamp: new Date() }),
-  levels: logLevels,
-  logLevel: "debug",
+  logLevels,
+  level: "debug",
   transports: [
-    createConsoleTransport({
-      format: ({ timestamp, level, message }) =>
-        `${chalk.grey(timestamp.toISOString())} ${colorize[level](level)} ${message}`,
-    }),
+    {
+      handler: createConsoleTransport({
+        format: ({ timestamp, level, message }) =>
+          `${chalk.grey(timestamp.toISOString())} ${colorize[level](level)} ${message}`,
+      }),
+    },
   ],
 });
 
@@ -219,3 +227,10 @@ logger.warn("Warning");
 - [Rotating file transport](./packages/skriva-transport-rotate-file/README.md) (recommended)
 - [Elasticsearch transport](./packages/skriva-transport-elasticsearch/README.md)
 - [Append file transport](./packages/skriva-transport-append-file/README.md) (prefer using rotating file instead)
+
+## Planned
+
+- Redis transport
+- DynamoDB transport
+- MongoDB transport
+- SQS transport

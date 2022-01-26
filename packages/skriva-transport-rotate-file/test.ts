@@ -13,16 +13,21 @@ type LogBaseContext = { timestamp: Date };
 
 const logger = createLogger<string, typeof logLevels, LogBaseContext>({
   context: () => ({ timestamp: new Date() }),
-  levels: logLevels,
-  logLevel: "debug",
+  logLevels,
+  level: "debug",
   transports: [
-    createFileRotator({
-      format: (packet) => `[${packet.level}] ${packet.message}`,
-      filename: "logs-%DATE%.log",
-      auditFile: "logs.json",
-      maxLogs: "14d",
-      size: "1k",
-    }),
+    {
+      handler: createFileRotator({
+        format: (packet) => `[${packet.level}] ${packet.message}`,
+        filename: "logs-%DATE%",
+        auditFile: "logs.json",
+        maxLogs: "14d",
+        size: "1k",
+        verbose: true,
+        dateFormat: "YYYY-MM-DD",
+        extension: ".log",
+      }),
+    },
   ],
 });
 

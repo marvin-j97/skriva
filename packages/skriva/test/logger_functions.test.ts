@@ -1,6 +1,7 @@
 import tap from "tap";
 
 import { createLogger } from "../src";
+import { sleep } from "./common";
 
 const logLevels = {
   error: 0,
@@ -17,7 +18,7 @@ tap.test("should create log functions for levels", async () => {
     level: "error",
     transports: [
       {
-        fn: async (packet) => {
+        handler: async (packet) => {
           calledSet.add(packet.level);
           calledCount++;
         },
@@ -31,6 +32,8 @@ tap.test("should create log functions for levels", async () => {
 
   logger.error("test");
   logger.info("test");
+
+  await sleep(50);
 
   tap.ok(calledSet.has("error"));
   tap.ok(!calledSet.has("info"));
@@ -47,7 +50,7 @@ tap.test("should only use chosen levels", async () => {
     level: "info",
     transports: [
       {
-        fn: async (packet) => {
+        handler: async (packet) => {
           calledSet.add(packet.level);
           calledCount++;
         },
@@ -61,6 +64,8 @@ tap.test("should only use chosen levels", async () => {
 
   logger.error("test");
   logger.info("test");
+
+  await sleep(50);
 
   tap.ok(calledSet.has("error"));
   tap.ok(calledSet.has("info"));
@@ -77,7 +82,7 @@ tap.test("should only use chosen levels (array)", async () => {
     level: ["info"],
     transports: [
       {
-        fn: async (packet) => {
+        handler: async (packet) => {
           calledSet.add(packet.level);
           calledCount++;
         },
@@ -92,6 +97,8 @@ tap.test("should only use chosen levels (array)", async () => {
   logger.error("test");
   logger.info("test");
 
+  await sleep(50);
+
   tap.ok(!calledSet.has("error"));
   tap.ok(calledSet.has("info"));
   tap.equal(calledCount, 1);
@@ -104,7 +111,7 @@ tap.test("Should continue even with error", async () => {
     level: "error",
     transports: [
       {
-        fn: async () => {
+        handler: async () => {
           throw new Error("Help");
         },
       },
@@ -123,7 +130,7 @@ tap.test("should call onError", async () => {
     level: "error",
     transports: [
       {
-        fn: async () => {
+        handler: async () => {
           throw new Error("Help");
         },
       },
@@ -133,8 +140,7 @@ tap.test("should call onError", async () => {
 
   logger.error("test");
 
-  // Need to sleep, because onError is a callback
-  await new Promise((r) => setTimeout(r, 500));
+  await sleep(50);
 
   tap.equal(error, "Help");
 });

@@ -17,24 +17,20 @@ const logLevels = {
   debug: 40,
   trace: 50,
 };
+const host = hostname();
 
 const logger = createLogger<
   string | { msg: string; [key: string]: unknown },
   typeof logLevels,
   Record<string, unknown>
 >({
-  context: () => ({ name: "myapp", time: new Date(), hostname: hostname(), pid: process.pid }),
+  context: () => ({ name: "myapp", time: new Date(), hostname: host, pid: process.pid }),
   logLevels,
-  level: "trace",
+  level: "info",
   transports: [
     {
-      fn: createConsoleTransport({
+      handler: createConsoleTransport({
         format: ({ level, message, ...base }) => {
-          return JSON.stringify({
-            ...base,
-            level: logLevels[level],
-            msg: message,
-          });
           if (typeof message === "string") {
             return JSON.stringify({
               ...base,
@@ -43,9 +39,9 @@ const logger = createLogger<
             });
           }
           return JSON.stringify({
+            ...message,
             ...base,
             level: logLevels[level],
-            ...message,
           });
         },
       }),

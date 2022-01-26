@@ -14,7 +14,7 @@ export type TransportFunction<T, L extends LogLevels, B extends BasePacket> = (
 ) => Promise<void>;
 
 export type Transport<T, L extends LogLevels, B extends BasePacket> = {
-  fn: TransportFunction<T, L, B>;
+  handler: TransportFunction<T, L, B>;
   level?: LevelSetting<L>;
 };
 
