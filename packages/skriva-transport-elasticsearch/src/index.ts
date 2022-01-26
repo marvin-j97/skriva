@@ -22,6 +22,7 @@ export function createElasticsearchTransport<T, L extends LogLevels, B extends B
       method: id ? "PUT" : "POST",
       body: JSON.stringify(opts.format(packet)),
     });
+
     if (!res.ok) {
       throw new Error(`Request failed with status ${res.status}: ${await res.text()}`);
     }
