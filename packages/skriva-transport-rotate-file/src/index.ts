@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getStream } from "file-stream-rotator";
-import { createReadStream, createWriteStream, unlinkSync } from "fs";
+import { createReadStream, createWriteStream, existsSync, unlinkSync } from "fs";
 import type { BasePacket, Formatter, LogLevels, TransportFunction } from "skriva";
 import zlib from "zlib";
 
@@ -82,12 +82,19 @@ export function createFileRotator<T, L extends LogLevels, B extends BasePacket>(
   // Snatched from https://github.com/winstonjs/winston-daily-rotate-file
   if (opts.gzip ?? true) {
     stream.on("rotate", (oldFile: string) => {
-      // TODO: if oldFile does not exist, return early
-      // TODO: if archived file already exists, return early
+      if (!existsSync(oldFile)) {
+        return;
+      }
+
+      const zipFile = `${oldFile}.gz`;
+
+      if (existsSync(zipFile)) {
+        return;
+      }
 
       const gzip = zlib.createGzip();
       const inp = createReadStream(oldFile);
-      const out = createWriteStream(`${oldFile}.gz`);
+      const out = createWriteStream(zipFile);
       inp
         .pipe(gzip)
         .pipe(out)
