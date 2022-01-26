@@ -1,6 +1,6 @@
 {
   "name": "skriva-transport-elasticsearch",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "Index logs into Elasticsearch",
   "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
   "homepage": "https://github.com/marvin-j97/skriva#readme",
@@ -21,8 +21,8 @@
     "@types/node-fetch": "2"
   },
   "dependencies": {
-    "skriva": "^0.0.1",
-    "node-fetch": "2"
+    "node-fetch": "2",
+    "skriva": "^0.0.1-alpha.0"
   },
   "keywords": [
     "skriva",
