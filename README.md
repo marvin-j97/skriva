@@ -32,7 +32,7 @@ const logLevels = {
 
 const logger = createLogger({
   logLevels,
-  // Setting to 'info' will print error, warn, info in this case
+  // Setting to 'info' will print everything up to info (error, warn, info in this case)
   level: "info",
   /* ... */
 });
@@ -90,6 +90,7 @@ logger.info("This is a log");
 ```typescript
 const logger = createLogger({
   // Adds timestamp to every log
+  // This alone won't make it show up in the message, you need to consume the context (see "More complex logger" or "Console logger with colours")
   // The base context function is executed for every received log message
   context: () => ({ timestamp: new Date() }),
   /* ... */
@@ -223,10 +224,10 @@ logger.warn("Warning");
 
 ## Transports
 
-- [Console transport](./packages/skriva-transport-console/README.md) (recommended)
-- [Rotating file transport](./packages/skriva-transport-rotate-file/README.md) (recommended)
-- [Elasticsearch transport](./packages/skriva-transport-elasticsearch/README.md)
-- [Append file transport](./packages/skriva-transport-append-file/README.md) (prefer using rotating file instead)
+- [Console transport](./packages/skriva-transport-console) (recommended)
+- [Rotating file transport](./packages/skriva-transport-rotate-file) (recommended)
+- [Elasticsearch transport](./packages/skriva-transport-elasticsearch)
+- [Append file transport](./packages/skriva-transport-append-file) (prefer using rotating file instead)
 
 ## Planned
 
