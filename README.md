@@ -6,7 +6,7 @@ From Old Norse _skrifa_, from Proto-Germanic _\*skrībaną_, a late borrowing fr
 
 ## About
 
-Super-unopionionated no-black-magic logger, with zero dependencies, tailored for Typescript usage.
+Super-unopinionated no-black-magic logger, with zero dependencies, tailored for Typescript usage.
 
 Like other logging libraries, multiple transports with custom logging levels are supported.
 
