@@ -14,7 +14,7 @@
     "publish:all": "lerna publish"
   },
   "devDependencies": {
-    "@types/node": "16.3.2",
+    "@types/node": "17.0.15",
     "@types/tap": "^15.0.5",
     "@typescript-eslint/eslint-plugin": "5.10.0",
     "@typescript-eslint/parser": "5.10.0",
