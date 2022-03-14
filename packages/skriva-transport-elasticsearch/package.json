@@ -21,7 +21,7 @@
     "@types/node-fetch": "2"
   },
   "dependencies": {
-    "node-fetch": "2",
+    "node-fetch": "3",
     "skriva": "^0.0.1-alpha.0"
   },
   "keywords": [
