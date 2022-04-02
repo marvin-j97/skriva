@@ -1,6 +1,6 @@
 {
   "name": "skriva-transport-rotate-file",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.2",
   "description": "Write logs to a rotating file",
   "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
   "homepage": "https://github.com/marvin-j97/skriva#readme",
