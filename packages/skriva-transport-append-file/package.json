@@ -1,6 +1,6 @@
 {
   "name": "skriva-transport-append-file",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Write logs to a single file",
   "author": "marvin-j97 <33938500+marvin-j97@users.noreply.github.com>",
   "homepage": "https://github.com/marvin-j97/skriva#readme",
@@ -18,7 +18,7 @@
     "url": "https://github.com/marvin-j97/skriva/issues"
   },
   "dependencies": {
-    "skriva": "^0.0.1-alpha.3"
+    "skriva": "^0.0.2"
   },
   "keywords": [
     "skriva",
