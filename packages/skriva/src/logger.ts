@@ -24,44 +24,30 @@ export function createLogger<T, L extends LogLevels, B extends BasePacket>(
 ): Record<keyof L, LogFunction<T>> {
   const { level: globalLevel, logLevels, context, transports } = opts;
 
-  const queue: { message: T; levelName: keyof L }[] = [];
-  let isProcessing = false;
-
-  async function processQueue(): Promise<void> {
-    if (!isProcessing) {
-      isProcessing = true;
-
-      do {
-        const item = queue.shift();
-
-        if (item) {
-          const { message, levelName } = item;
-          const packet: LogPacket<T, L, B> = { ...context(message), message, level: levelName };
-          await Promise.all(
-            transports.map(async (x) => {
-              if (x.level && !checkLevel(logLevels, levelName, x.level)) {
-                return;
-              } else if (!x.level && !checkLevel(logLevels, levelName, globalLevel)) {
-                return;
-              }
-              await x.handler(packet);
-            }),
-          ).catch((error) => {
-            opts.onError?.(error);
-          });
-        }
-      } while (queue.length);
-
-      isProcessing = false;
-    }
-  }
-
   const loggerFns: Record<keyof L, LogFunction<T>> = {} as Record<keyof L, LogFunction<T>>;
 
   for (const levelName of Object.keys(logLevels)) {
     loggerFns[levelName as keyof L] = (message) => {
-      queue.push({ message, levelName });
-      processQueue();
+      const packet: LogPacket<T, L, B> = { ...context(message), message, level: levelName };
+
+      for (const x of transports) {
+        if (x.level && !checkLevel(logLevels, levelName, x.level)) {
+          continue;
+        } else if (!x.level && !checkLevel(logLevels, levelName, globalLevel)) {
+          continue;
+        }
+
+        try {
+          const result = x.handler(packet);
+          if (result instanceof Promise) {
+            result.catch((error) => {
+              opts.onError?.(error);
+            });
+          }
+        } catch (error: any) {
+          opts.onError?.(error);
+        }
+      }
     };
   }
 

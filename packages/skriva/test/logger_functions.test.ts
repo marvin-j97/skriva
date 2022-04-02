@@ -82,7 +82,7 @@ tap.test("should only use chosen levels (array)", async () => {
     level: ["info"],
     transports: [
       {
-        handler: async (packet) => {
+        handler: (packet) => {
           calledSet.add(packet.level);
           calledCount++;
         },
@@ -111,7 +111,7 @@ tap.test("Should continue even with error", async () => {
     level: "error",
     transports: [
       {
-        handler: async () => {
+        handler: () => {
           throw new Error("Help");
         },
       },
@@ -130,7 +130,7 @@ tap.test("should call onError", async () => {
     level: "error",
     transports: [
       {
-        handler: async () => {
+        handler: () => {
           throw new Error("Help");
         },
       },
