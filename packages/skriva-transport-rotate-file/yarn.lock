@@ -2,12 +2,10 @@
 # yarn lockfile v1
 
 
-file-stream-rotator@^0.5.7:
-  version "0.5.7"
-  resolved "https://registry.npmjs.org/file-stream-rotator/-/file-stream-rotator-0.5.7.tgz"
-  dependencies:
-    moment "^2.11.2"
+file-stream-rotator@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/file-stream-rotator/-/file-stream-rotator-1.0.0.tgz#de58379321a1ea6d2938ed5f5a2eff3b7f8b2780"
 
-moment@^2.11.2:
-  version "2.29.1"
-  resolved "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+skriva@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/skriva/-/skriva-0.0.2.tgz#460acf5545b2f7912ae6ced00e2e9ef208febc3c"
